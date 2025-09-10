@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can of Whoop Ass - Official Store Locator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #000080;
+            background-image: 
+                radial-gradient(circle at 20% 20%, #FF00FF 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #00FFFF 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, #FFFF00 0%, transparent 50%);
+            min-height: 100vh;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #FF00FF, #00FFFF, #FFFF00, #FF00FF);
+            background-size: 400% 400%;
+            animation: rainbow 3s linear infinite;
+            padding: 20px;
+            border: 5px solid #FFFFFF;
+            box-shadow: 0 0 20px #FF00FF, inset 0 0 20px #00FFFF;
+        }
+
+        .hero-can {
+            width: 200px;
+            height: 300px;
+            margin: 20px auto;
+            display: block;
+            border: 3px solid #00FFFF;
+            border-radius: 10px;
+            box-shadow: 0 0 30px #FF00FF, 0 0 50px #00FFFF;
+            animation: float 3s ease-in-out infinite;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #FFFFFF;
+            text-shadow: 
+                2px 2px 0px #000000,
+                4px 4px 0px #000000,
+                6px 6px 0px #FF00FF;
+            margin-bottom: 10px;
+            animation: blink 1s infinite alternate;
+            font-weight: bold;
+            letter-spacing: 3px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #FFFFFF;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+
+        .warning {
+            background: #FFFF00;
+            color: #FF0000;
+            border: 3px solid #000000;
+            padding: 10px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: flash 2s infinite;
+            font-size: 1.1em;
+        }
+
+        @keyframes flash {
+            0%, 50% { background: #FFFF00; }
+            51%, 100% { background: #FF0000; color: #FFFF00; }
+        }
+
+        .stores-section {
+            background: #800080;
+            border: 5px solid #FFFFFF;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px #FF00FF;
+        }
+
+        .stores-grid {
+            display: block;
+        }
+
+        .store-card {
+            background: linear-gradient(90deg, #FF00FF, #00FFFF);
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 3px solid #FFFF00;
+            color: #000000;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .store-name {
+            font-size: 1.5em;
+            color: #FFFF00;
+            text-shadow: 2px 2px 0px #000000;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .store-type {
+            background: #000080;
+            color: #FFFFFF;
+            padding: 3px 8px;
+            border: 2px solid #FFFFFF;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .store-description {
+            color: #000000;
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .availability {
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 2px solid #000000;
+            display: inline-block;
+            font-size: 0.8em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .in-stock {
+            background: #00FF00;
+            color: #000000;
+            animation: pulse-green 1s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { background: #00FF00; }
+            50% { background: #FFFF00; }
+        }
+
+        .limited {
+            background: #FFFF00;
+            color: #FF0000;
+        }
+
+        .custom-order {
+            background: #FF00FF;
+            color: #FFFFFF;
+        }
+
+        .footer {
+            text-align: center;
+            background: #000000;
+            color: #FFFFFF;
+            padding: 20px;
+            border: 3px solid #FFFFFF;
+            margin-top: 20px;
+        }
+
+        .disclaimer {
+            font-size: 0.8em;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            color: #FFFF00;
+        }
+
+        .fun-fact {
+            background: linear-gradient(45deg, #FF00FF, #00FFFF);
+            color: #000000;
+            padding: 15px;
+            border: 3px solid #FFFF00;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+            animation: rotate-colors 2s infinite;
+        }
+
+        @keyframes rotate-colors {
+            0% { background: linear-gradient(45deg, #FF00FF, #00FFFF); }
+            33% { background: linear-gradient(45deg, #00FFFF, #FFFF00); }
+            66% { background: linear-gradient(45deg, #FFFF00, #FF00FF); }
+            100% { background: linear-gradient(45deg, #FF00FF, #00FFFF); }
+        }
+
+        .marquee {
+            background: #FF0000;
+            color: #FFFFFF;
+            padding: 10px;
+            margin: 20px 0;
+            border: 2px solid #FFFFFF;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .blink-text {
+            animation: blink-fast 0.5s infinite;
+        }
+
+        @keyframes blink-fast {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .retro-button {
+            background: #FFFF00;
+            color: #000000;
+            border: 3px solid #000000;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 5px 5px 0px #FF00FF;
+        }
+
+        .retro-button:hover {
+            background: #FF00FF;
+            color: #FFFFFF;
+            box-shadow: 5px 5px 0px #FFFF00;
+        }
+
+        .dancing-text {
+            display: inline-block;
+            animation: dance 1s infinite;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: translateY(0px); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(0px); }
+            75% { transform: translateY(5px); }
+        }
+
+        .cyber-border {
+            border: 3px solid #00FFFF;
+            box-shadow: 
+                0 0 10px #00FFFF,
+                inset 0 0 10px #FF00FF;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+                letter-spacing: 1px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+
+            .hero-can {
+                width: 150px;
+                height: 225px;
+            }
+        }
+
+        /* Starfield background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: #FFFFFF;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="starfield"></div>
+    
+    <div class="container">
+        <div class="header cyber-border">
+            <img src="https://i.postimg.cc/25PrxBL6/Chat-GPT-Image-Jun-17-2025-08-50-03-AM.png" alt="WHOOP ASS Can" class="hero-can">
+            <h1>🥫 CAN OF WHOOP ASS 💥</h1>
+            <div class="subtitle">★ OFFICIAL CYBERSPACE STORE LOCATOR ★</div>
+            <div class="warning blink-text">
+                ⚠️ WARNING: CONTENTS UNDER EXTREME PRESSURE ⚠️
+            </div>
+        </div>
+
+        <div class="marquee">
+            <div class="marquee-text">
+                ★★★ WELCOME TO THE INFORMATION SUPERHIGHWAY ★★★ GET YOUR WHOOP ASS HERE ★★★ WORLD WIDE WEB EXCLUSIVE ★★★
+            </div>
+        </div>
+
+        <div class="fun-fact">
+            <span class="dancing-text">🎉</span> RADICAL FACT: The "Can of Whoop Ass" has been the ULTIMATE gag gift since 1990! <span class="dancing-text">🎉</span>
+        </div>
+
+        <div class="stores-section cyber-border">
+            <h2 style="color: #FFFF00; text-align: center; margin-bottom: 20px; font-size: 1.8em; text-shadow: 2px 2px 0px #000000;">
+                ★ WHERE TO BUY YOUR WHOOP ASS ★
+            </h2>
+
+            <div class="stores-grid">
+                <div class="store-card">
+                    <div class="store-name">🛒 AMAZON.COM</div>
+                    <div class="store-type">ONLINE MEGASTORE</div>
+                    <div class="store-description">
+                        The ULTIMATE destination for novelty cans! Multiple sellers offer everything from classic "Whoop Ass" to specialty flavors like "Extra Strength" and "Diet Whoop Ass." SURF THE NET TO VICTORY!
+                    </div>
+                    <div class="availability in-stock">✅ IN STOCK NOW!</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🎁 SPENCER'S GIFTS</div>
+                    <div class="store-type">NOVELTY HEADQUARTERS</div>
+                    <div class="store-description">
+                        The KINGS of gag gifts! Spencer's has been selling cans of whoop ass alongside other TOTALLY AWESOME novelty items since the dawn of time. Check the MALL or GO ONLINE!
+                    </div>
+                    <div class="availability in-stock">✅ USUALLY AVAILABLE</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🎪 NOVELTY GIFT SHOPS</div>
+                    <div class="store-type">LOCAL RETAILERS</div>
+                    <div class="store-description">
+                        Tourist shops, boardwalk stores, and local novelty retailers often stock these CLASSIC items. Perfect for last-minute gift emergencies! TOTALLY TUBULAR!
+                    </div>
+                    <div class="availability limited">🔍 CHECK LOCALLY</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🛍️ EBAY AUCTIONS</div>
+                    <div class="store-type">CYBER AUCTION HOUSE</div>
+                    <div class="store-description">
+                        Find VINTAGE, RARE, and collectible cans of whoop ass! Some sellers offer custom labels or hard-to-find varieties from the RADICAL 90s era!
+                    </div>
+                    <div class="availability in-stock">✅ VARIOUS OPTIONS</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🎯 PARTY SUPPLY STORES</div>
+                    <div class="store-type">PARTY CENTRAL</div>
+                    <div class="store-description">
+                        Many party supply stores carry gag gifts including cans of whoop ass. PERFECT for bachelor parties, birthdays, and office pranks! PARTY ON!
+                    </div>
+                    <div class="availability limited">📞 CALL AHEAD</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🏪 TRUCK STOPS</div>
+                    <div class="store-type">HIGHWAY STOPS</div>
+                    <div class="store-description">
+                        Some highway truck stops and GNARLY gas stations carry novelty items. You might strike GOLD at the most unexpected places on the INFORMATION SUPERHIGHWAY!
+                    </div>
+                    <div class="availability limited">🎲 HIT OR MISS</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🎨 CUSTOM PRINT SHOPS</div>
+                    <div class="store-type">PRINT SERVICES</div>
+                    <div class="store-description">
+                        Want a PERSONALIZED can? Many local print shops can create custom labels for empty cans. Make it TOTALLY RADICAL with names or inside jokes!
+                    </div>
+                    <div class="availability custom-order">🎯 CUSTOM ORDERS</div>
+                </div>
+
+                <div class="store-card">
+                    <div class="store-name">🎪 CARNIVAL PRIZES</div>
+                    <div class="store-type">AMUSEMENT VENUES</div>
+                    <div class="store-description">
+                        County fairs, carnivals, and some arcade prize counters occasionally feature cans of whoop ass among their AWESOME novelty prizes!
+                    </div>
+                    <div class="availability limited">🎡 SEASONAL ONLY</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee">
+            <div class="marquee-text">
+                ★★★ THANK YOU FOR SURFING THE INFORMATION SUPERHIGHWAY WITH US ★★★ RADICAL VISITOR DETECTED ★★★ YOU'VE BEEN TOTALLY WHOOP-ASSED ★★★
+            </div>
+        </div>
+
+        <div class="footer cyber-border">
+            <button class="retro-button" onclick="startWhoopAssGame()">
+                CLICK HERE FOR INSTANT WHOOP ASS!
+            </button>
+            
+            <div id="gameContainer" style="display: none; margin-top: 20px; padding: 20px; background: #000000; border: 3px solid #FFFF00; color: #FFFFFF;">
+                <h3 style="color: #FFFF00; text-align: center; margin-bottom: 15px;">⚡ WHOOP ASS BATTLE SIMULATOR ⚡</h3>
+                <div id="gameArea" style="text-align: center;">
+                    <div id="player" style="font-size: 3em; margin: 20px;">😎</div>
+                    <div id="enemy" style="font-size: 3em; margin: 20px;">🤖</div>
+                    <div id="gameText" style="margin: 15px; font-size: 1.2em; color: #00FFFF;">
+                        GET READY TO UNLEASH THE WHOOP ASS!
+                    </div>
+                    <div id="score" style="margin: 10px; color: #FFFF00;">WHOOP ASS METER: 0</div>
+                    <button class="retro-button" onclick="whoopAss()" id="whoopButton">UNLEASH WHOOP ASS!</button>
+                    <button class="retro-button" onclick="closeGame()">EXIT GAME</button>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>DISCLAIMER:</strong> A "Can of Whoop Ass" is a TOTALLY RADICAL novelty gag gift - typically an empty can with HUMOROUS labeling. 
+                No actual whoop ass is contained within. Side effects may include uncontrollable laughter, increased confidence, 
+                and the sudden urge to display it prominently on your desk. Not recommended for actual conflict resolution.
+                <br><br>
+                BEST VIEWED WITH NETSCAPE NAVIGATOR 2.0 OR HIGHER!
+            </div>
+            
+            <div style="margin-top: 15px; font-weight: bold; color: #FFFF00; font-size: 1.2em;">
+                <span class="blink-text">🥫 REMEMBER: The best whoop ass comes from within! 💪</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create starfield background
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starfield.appendChild(star);
+            }
+        }
+
+        // Add click effects to store cards
+        document.addEventListener('DOMContentLoaded', function() {
+            createStarfield();
+            
+            const cards = document.querySelectorAll('.store-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add some 90s sound effects (visual feedback)
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.border = '3px solid #FFFFFF';
+                    this.style.boxShadow = '0 0 20px #FFFFFF';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.border = '3px solid #FFFF00';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+
+        // Whoop Ass Game Functions
+        let score = 0;
+        let gameActive = false;
+        
+        function startWhoopAssGame() {
+            document.getElementById('gameContainer').style.display = 'block';
+            document.getElementById('gameContainer').scrollIntoView({ behavior: 'smooth' });
+            gameActive = true;
+            score = 0;
+            updateScore();
+            document.getElementById('gameText').innerHTML = 'GET READY TO UNLEASH THE WHOOP ASS!';
+            resetGameCharacters();
+        }
+        
+        function closeGame() {
+            document.getElementById('gameContainer').style.display = 'none';
+            gameActive = false;
+        }
+        
+        function whoopAss() {
+            if (!gameActive) return;
+            
+            score += Math.floor(Math.random() * 10) + 1;
+            updateScore();
+            
+            // Animate the whoop ass action
+            const player = document.getElementById('player');
+            const enemy = document.getElementById('enemy');
+            const gameText = document.getElementById('gameText');
+            
+            // Player action animation
+            player.style.transform = 'scale(1.5) rotate(360deg)';
+            setTimeout(() => {
+                player.style.transform = 'scale(1) rotate(0deg)';
+            }, 500);
+            
+            // Enemy reaction
+            enemy.style.transform = 'scale(0.8)';
+            enemy.innerHTML = ['💥', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+            
+            setTimeout(() => {
+                enemy.style.transform = 'scale(1)';
+                enemy.innerHTML = '🤖';
+            }, 1000);
+            
+            // Update game text with random messages
+            const messages = [
+                'WHOOP ASS DELIVERED!',
+                'CRITICAL HIT! MAXIMUM WHOOP ASS!',
+                'ENEMY STUNNED BY YOUR WHOOP ASS!',
+                'WHOOP ASS COMBO ACTIVATED!',
+                'LEGENDARY WHOOP ASS TECHNIQUE!',
+                'WHOOP ASS OVERLOAD!',
+                'ENEMY CANNOT HANDLE THE WHOOP ASS!',
+                'WHOOP ASS LEVEL: OVER 9000!'
+            ];
+            
+            gameText.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+            gameText.style.color = ['#FF00FF', '#00FFFF', '#FFFF00', '#00FF00'][Math.floor(Math.random() * 4)];
+            
+            // Victory condition
+            if (score >= 100) {
+                gameText.innerHTML = '🏆 ULTIMATE WHOOP ASS MASTER! YOU WIN! 🏆';
+                gameText.style.color = '#FFFF00';
+                document.getElementById('whoopButton').innerHTML = 'PLAY AGAIN!';
+                setTimeout(() => {
+                    score = 0;
+                    updateScore();
+                    document.getElementById('whoopButton').innerHTML = 'UNLEASH WHOOP ASS!';
+                    resetGameCharacters();
+                }, 3000);
+            }
+        }
+        
+        function updateScore() {
+            document.getElementById('score').innerHTML = 'WHOOP ASS METER: ' + score;
+            const scoreElement = document.getElementById('score');
+            if (score >= 100) {
+                scoreElement.style.color = '#00FF00';
+                scoreElement.style.animation = 'blink-fast 0.3s infinite';
+            } else if (score >= 50) {
+                scoreElement.style.color = '#FFFF00';
+            } else {
+                scoreElement.style.color = '#FF00FF';
+            }
+        }
+        
+        function resetGameCharacters() {
+            document.getElementById('player').innerHTML = '😎';
+            document.getElementById('enemy').innerHTML = '🤖';
+            document.getElementById('gameText').style.color = '#00FFFF';
+        }
+
+        // Konami Code easter egg
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                alert('CHEAT CODE ACTIVATED! UNLIMITED WHOOP ASS UNLOCKED!');
+                document.body.style.animation = 'rainbow 0.5s infinite';
+            }
+        });
+    </script>
+</body>
+</html>
